@@ -2,11 +2,13 @@
 using Microsoft.Extensions.Options; 
 using LojinhaServer.Models;
 using MongoDB.Driver;
+using LojinhaServer.Repositories;
 
 namespace LojinhaServer.Extensions
 {
     public static class ServiceExtensions
     {
+        
         // Este método estende a funcionalidade de IServiceCollection para configurar políticas CORS.
         public static void ConfigureCors(this IServiceCollection services)
         {
@@ -18,6 +20,12 @@ namespace LojinhaServer.Extensions
                 });
             });
         }
+
+        public static void ConfigureProductRepository(this IServiceCollection services)
+        {
+            services.AddSingleton<IProductRepository, ProductRepository>();
+        }
+
 
         // Este método estende a funcionalidade de IServiceCollection para configurar as configurações do MongoDB.
         public static void ConfigureMongoDBSettings(this IServiceCollection services, IConfiguration config)
@@ -36,6 +44,8 @@ namespace LojinhaServer.Extensions
                 // Retorna uma referência para o banco de dados especificado nas configurações.
                 return client.GetDatabase(settings.DatabaseName);
             });
+            
         }
+        
     }
 }

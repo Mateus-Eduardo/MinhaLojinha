@@ -34,5 +34,7 @@ namespace LojinhaServer.Collections
         [BsonElement("marca")]
         [BsonIgnoreIfNull]
         public string Marca { get; set; }
+
+        
     }
 }
