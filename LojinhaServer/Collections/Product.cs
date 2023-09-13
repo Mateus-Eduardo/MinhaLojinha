@@ -1,40 +1,30 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
+namespace LojinhaServer.Collections;
 
-namespace LojinhaServer.Collections
+[Table("products")]
+[BsonIgnoreExtraElements]
+public class Product
 {
-    [BsonIgnoreExtraElements]
-    public class Product
-    {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
-
-        [BsonElement("name")]
-        [BsonIgnoreIfNull] // Ignora o campo se estiver nulo no documento BSON
-        public string Nome { get; set; }
-
-        [BsonElement("description")]
-        [BsonIgnoreIfNull]
-        public string Description { get; set; }
-
-        [BsonElement("price")]
-        [BsonIgnoreIfNull]
-        public string Price { get; set; }
-
-        [BsonElement("categorias")]
-        [BsonIgnoreIfNull]
-        public List<string> Categorias { get; set; }
-
-        [BsonElement("tags")]
-        [BsonIgnoreIfNull]
-        public string Tags { get; set; }
-
-        [BsonElement("marca")]
-        [BsonIgnoreIfNull]
-        public string Marca { get; set; }
-
-        
-    }
+[BsonId]
+[BsonRepresentation(BsonType.ObjectId)]
+public string Id { get; set; }
+[BsonElement("name")]
+[JsonPropertyName("Nome")]
+public string Name { get; set; }
+[BsonElement("description")]
+[JsonPropertyName("Descrição")]
+public string Description { get; set; }
+[BsonElement("price")]
+public decimal Price { get; set; }
+[BsonElement("offPrice")]
+public decimal OffPrice { get; set; }
+[BsonElement("categories")]
+public List<string> Categories { get; set; }
+[BsonElement("tags")]
+public List<string> Tags { get; set; }
+[BsonElement("brand")]
+public string Brand { get; set; }
 }
